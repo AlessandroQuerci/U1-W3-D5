@@ -27,7 +27,7 @@ console.log(random);
   Crea una variabile chiamata "me" e assegnaci un oggetto contenente le seguenti proprietà: name = il tuo nome, surname = il tuo cognome, age = la tua età.
 */
 
-const me = {
+let me = {
   name: "Alessandro",
   surname: "Querci",
   age: 19,
@@ -45,13 +45,21 @@ console.log(me);
   Crea del codice per aggiungere programmaticamente all'oggetto precedentemente creato un array chiamato "skills", contenente i linguaggi di programmazione che conosci.
 */
 
+me.skills = ["HTML", "CSS", "JavaScript"];
+console.log(me);
+
 /* ESERCIZIO F
   Crea un pezzo di codice per aggiungere un nuovo elemento all'array "skills" contenuto nell'oggetto "me".
 */
+me.skills.push("Python");
+console.log(me);
 
 /* ESERCIZIO G
   Crea un pezzo di codice per rimuovere programmaticamente l'ultimo elemento dall'array "skills" contenuto nell'oggetto "me".
 */
+
+me.skills.pop();
+console.log(me);
 
 // Funzioni
 
@@ -345,6 +353,19 @@ console.log(deleteProp(myDreamCar, "brand"));
   Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
 */
 
+const newestMovie = function (movies) {
+  let recentMovie = movies[0];
+  for (let i = 1; i < movies.length; i++) {
+    const currentMovie = movies[i];
+    if (currentMovie.year > recentMovie.year) {
+      recentMovie = currentMovie;
+    }
+  }
+  return recentMovie;
+};
+const recentMovie = newestMovie(movies);
+console.log(recentMovie);
+
 /* ESERCIZIO 13
   Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
 */
@@ -394,10 +415,10 @@ console.log(sumAllTheYears());
 */
 
 const searchByTitle = function (string) {
-  const searchByTitleArray = movies.filter((movie) => movie.Title === string);
+  const searchByTitleArray = movies.filter((movie) => movie.Title.includes(string));
   return searchByTitleArray;
 };
-console.log(searchByTitle("The Lord of the Rings: The Fellowship of the Ring"));
+console.log(searchByTitle("War"));
 
 /* ESERCIZIO 18
   Scrivi una funzione chiamata "searchAndDivide" che riceve una stringa come parametro e ritorna un oggetto contenente due array: "match" e "unmatch".
@@ -405,21 +426,26 @@ console.log(searchByTitle("The Lord of the Rings: The Fellowship of the Ring"));
 */
 
 const searchAndDivide = function (string) {
-  const matchFilmsArray = movies.filter((movie) => movie.Title === string);
-  const unmatchFilmsArray = movies.filter((movie) => movie.Title !== string);
+  const matchFilmsArray = movies.filter((movie) => movie.Title.includes(string));
+  const unmatchFilmsArray = movies.filter((movie) => movie.Title.includes(!string));
+
   const resultFilms = {
     match: [...matchFilmsArray],
     unmatch: [...unmatchFilmsArray],
   };
   return resultFilms;
 };
-console.log(searchAndDivide("The Lord of the Rings: The Fellowship of the Ring"));
+console.log(searchAndDivide("War"));
 
 /* ESERCIZIO 19
   Scrivi una funzione chiamata "removeIndex" che riceve un numero come parametro e ritorna l'array "movies" fornito privo dell'elemento nella posizione ricevuta come parametro.
 */
 
-const removeIndex = function (num) {};
+const removeIndex = function (num) {
+  delete movies[num];
+  return movies;
+};
+console.log(removeIndex(5));
 
 // DOM (nota: gli elementi che selezionerai non si trovano realmente nella pagina)
 
@@ -427,29 +453,66 @@ const removeIndex = function (num) {};
   Scrivi una funzione per selezionare l'elemento dotato di id "container" all'interno della pagina.
 */
 
+const idContainer = () => document.getElementById("container");
+
 /* ESERCIZIO 21
   Scrivi una funzione per selezionare ogni tag <td> all'interno della pagina.
 */
+
+let allTd = () => document.querySelectorAll("td");
 
 /* ESERCIZIO 22
   Scrivi una funzione che, tramite un ciclo, stampa in console il testo contenuto in ogni tag <td> all'interno della pagina.
 */
 
+const stampTd = function () {
+  let allTdText = document.querySelectorAll("td");
+  allTdText.forEach((td) => {
+    console.log(td.textContent);
+  });
+};
+
 /* ESERCIZIO 23
   Scrivi una funzione per aggiungere un background di colore rosso a ogni link all'interno della pagina.
 */
+
+const addColor = function () {
+  const allA = document.querySelectorAll("a");
+  allA.forEach((a) => {
+    a.style.backgroundColor = "red";
+  });
+};
 
 /* ESERCIZIO 24
   Scrivi una funzione per aggiungere un nuovo elemento alla lista non ordinata con id "myList".
 */
 
+const newElement = function () {
+  const myList = document.getElementById("myList");
+  const newItem = document.createElement("li");
+  myList.appendChild(newItem);
+  return myList;
+};
+
 /* ESERCIZIO 25
   Scrivi una funzione per svuotare la lista non ordinata con id "myList".
 */
 
+const emptyList = function () {
+  const myList = document.getElementById("myList");
+  while (myList.firstChild) {
+    myList.removeChild(myList.firstChild);
+  }
+};
+
 /* ESERCIZIO 26
   Scrivi una funzione per aggiungere ad ogni tag <tr> la classe CSS "test"
 */
+
+const addClass = () =>
+  document.querySelectorAll("tr").forEach((tr) => {
+    tr.classList.add("test");
+  });
 
 // [EXTRA] JS Avanzato
 
