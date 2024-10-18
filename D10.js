@@ -353,31 +353,20 @@ console.log(deleteProp(myDreamCar, "brand"));
   Scrivi una funzione chiamata "newestMovie" che trova il film più recente nell'array "movies" fornito.
 */
 
-const newestMovie = function (movies) {
-  let recentMovie = movies[0];
-  for (let i = 1; i < movies.length; i++) {
-    const currentMovie = movies[i];
-    if (currentMovie.year > recentMovie.year) {
-      recentMovie = currentMovie;
-    }
-  }
-  return recentMovie;
-};
-const recentMovie = newestMovie(movies);
-console.log(recentMovie);
+//:(
 
 /* ESERCIZIO 13
   Scrivi una funzione chiamata countMovies che ritorna il numero di film contenuti nell'array "movies" fornito.
 */
 
-const countMovies = function () {
+const countMoviess = function () {
   let c = 0;
   for (let i = 0; i < movies.length; i++) {
     c++;
   }
   return c;
 };
-console.log(countMovies());
+console.log(countMoviess());
 
 /* ESERCIZIO 14
   Scrivi una funzione chiamata "onlyTheYears" che crea un array con solamente gli anni di uscita dei film contenuti nell'array "movies" fornito.
